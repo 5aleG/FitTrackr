@@ -1,4 +1,29 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+
+const slideIn = keyframes`
+from {
+  transform: translateY(100%);
+}
+to {
+  transform: translateY(0);
+}
+`;
+
+export const FormOverlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: ${slideIn} 0.3s ease-in-out;
+`;
 
 export const FormContainer = styled.div`
     position: fixed;
@@ -45,4 +70,14 @@ export const SubmitButton = styled.button`
     background-color: #79cff2;
     color: white;
     cursor: pointer;
+`;
+
+export const CloseButton = styled.button`
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #cfbfba;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
 `;

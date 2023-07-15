@@ -1,15 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500&display=swap');
   :root {
-    --background-color: #FAFAFA;
+    /* --background-color: #FAFAFA;
     --plate-color: #FFFFFF;
-    --primary-text-color: #525252;
+    --primary-text-color: #FFFFFF;
     --secondary-text-color: #949494;
     --button-text-color: #525252;
     --button-background-color: #79CFF2;
     --highlight-color: #79CFF2;
-    --box-shadow-color: #00000040;
+    --box-shadow-color: #00000040; */
   }
 
   html, body, div, span, applet, object, iframe,
