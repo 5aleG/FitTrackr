@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from "../../Components/LoginForm/loginForm";
+import SignUpForm from '../../Components/SignUpForm/signUpForm';
 import { BackgroundContainer, 
       MarketingText,
       LoginContainer, 
@@ -10,22 +11,29 @@ import { BackgroundContainer,
 const Login = () => {
 
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
 
-  const handleLoginClick = () => {
+  const handleLoginTouch = () => {
     setShowLoginForm(true);
   };
+
+  const handleSignUpTouch = () => {
+    setShowSignUpForm(true);
+  }
+
   return (
     <BackgroundContainer>
       <MarketingText>“ MAKE FITNESS YOUR DAILY HABBIT “</MarketingText>
       <LoginContainer>
-        <LoginButton onTouchStart={handleLoginClick}>
+        <LoginButton onTouchStart={handleLoginTouch}>
           <ButtonText>Login</ButtonText>
         </LoginButton>
-        <SignUpButton>
+        <SignUpButton onTouchStart={handleSignUpTouch}>
           <ButtonText>Sign Up</ButtonText>
         </SignUpButton>
       </LoginContainer>
       {showLoginForm && <LoginForm />}
+      {showSignUpForm && <SignUpForm />}
     </BackgroundContainer>
   );
 };
