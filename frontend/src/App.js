@@ -5,17 +5,21 @@ import Login from "./Pages/Login/login"
 import Home from "./Pages/Home/home";
 
 const App = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767, minWidth: 400 });
+  const isMobile = useMediaQuery({ maxWidth: 767, minWidth: 360 });
   
   return (
     <Routes>
-      {!isMobile && (
-        <Route path="/login" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
+      {!isMobile ? (
+        <>
+          <Route path="/login" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
+          <Route path="/home" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
+        </>
+      ) : (
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+        </>
       )}
-      {isMobile && (
-        <Route path="/login" element={<Login />} />
-      )}
-      <Route path="/home" element={<Home />} />
     </Routes>
   );
 };
