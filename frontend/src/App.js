@@ -11,12 +11,12 @@ const App = () => {
     <Routes>
       {!isMobile ? (
         <>
-          <Route path="/login" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
+          <Route path="/" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
           <Route path="/home" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
         </>
       ) : (
         <>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
         </>
       )}
