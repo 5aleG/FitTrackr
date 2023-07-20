@@ -8,7 +8,8 @@ const GreetingMessage = () => {
         <div>
             <MessageWrapper>
                 <Message>Welcome back</Message>
-                <Username>Sandra Gomes</Username>
+                {/* API call for User name - static value just for demo */}
+                <Username>Sasha Golijanin</Username> 
             </MessageWrapper>
         </div>
     )
