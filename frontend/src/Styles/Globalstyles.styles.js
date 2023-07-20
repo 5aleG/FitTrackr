@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500&display=swap');
   :root {
-    --background-color: #FAFAFA;
+    --background-color: #FFF;
     --plate-color: #FFFFFF;
     --primary-text-color: #FFFFFF;
     --secondary-text-color: #949494;

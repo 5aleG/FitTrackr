@@ -1,20 +1,21 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-const bounce = keyframes`
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
+const expandAnimation = keyframes`
+  0% {
+    transform: scale(0.9);
   }
-  40% {
-    transform: translateY(-20px);
+  50% {
+    transform: scale(1.05);
   }
-  60% {
-    transform: translateY(-10px);
+  100% {
+    transform: scale(1);
   }
 `;
 
 export const HealthScoreSquare = styled.div`
   display: flex;
-  align-items: center;
+  align-items: ${({ expanded }) => (expanded ? "flex-start" : "center")};
+  flex-direction: ${({ expanded }) => (expanded ? "row" : "row")};
   background-color: #eeeeee;
   border-radius: 30px;
   padding: 20px;
@@ -22,25 +23,26 @@ export const HealthScoreSquare = styled.div`
   margin-right: 20px;
   color: #555555;
   cursor: pointer;
-  transition: height 0.3s, transform 0.5s;
-
+  transition: height 1s, transform 1s;
   ${({ expanded }) =>
     expanded &&
     css`
-      animation: ${bounce} 1s;
+      animation: ${expandAnimation} 1s;
     `}
 `;
 
 export const HealthScoreCircle = styled.div`
+  min-width: 30px;
   border-radius: 50%;
   background-color: #e67842;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 600;
   color: white;
+  margin-bottom: ${({ expanded }) => (expanded ? "20px" : "0")};
 `;
 
 export const HealthScoreInfo = styled.div`

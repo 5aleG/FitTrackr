@@ -17,7 +17,7 @@ export const MarketingText = styled.h1`
     height: 500px;
     position: absolute;
     left: 46px;
-    top: 75px;
+    top: 45px;
     color: #FFF;
     font-family: 'Teko', sans-serif;
     font-size: 50px;
