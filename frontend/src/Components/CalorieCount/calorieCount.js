@@ -12,7 +12,7 @@ const calGraphImage = require("../../Assets/cal_graph.svg").default;
 
 const CalorieCount = () => {
   // API call for users daily calories
-  const dailyCalories = 1200; // Example
+  const dailyCalories = 1800; // Example
 
   return (
     <CalorieCountSquare>
