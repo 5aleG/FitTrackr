@@ -5,12 +5,12 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --background-color: #FFF;
     --plate-color: #FFFFFF;
-    --primary-text-color: #FFFFFF;
+    --primary-text-color: #525252;
     --secondary-text-color: #949494;
     --button-text-color: #525252;
-    --button-background-color: #79CFF2;
+    --button-background-color: #F4F4F4;
     --highlight-color: #79CFF2;
-    --box-shadow-color: #00000040;
+    --box-shadow-color: #E4EAF1;
   }
 
   html, body, div, span, applet, object, iframe,

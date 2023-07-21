@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CurrentWeightSquare = styled.div`
+export const WorkoutSquare = styled.div`
   display: flex;
   align-items: center;
   background-color: var(--background-color);
@@ -15,29 +15,29 @@ export const CurrentWeightSquare = styled.div`
   box-shadow: 0 0 18px var(--box-shadow-color);
 `;
 
-export const CurrentWeightInfo = styled.div`
+export const WorkoutInfo = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const WeightRecord = styled.p`
+export const DailyWorkout = styled.p`
   font-size: 14px;
   font-weight: normal;
   padding-bottom: 5px;
 `;
 
-export const WeightRecordNumber = styled.p`
+export const WorkoutNumber = styled.p`
   font-size: 28px;
   font-weight: bold;
 `;
 
-export const KgLabel = styled.span`
+export const Minutes = styled.span`
   font-size: 12px;
   font-weight: normal;
 `;
 
-export const WeightImage = styled.img`
-  width: 120px;
-  height: 80px;
+export const WorkoutImage = styled.img`
+  width: 110px;
+  height: 70px;
   margin-left: auto;
 `;
