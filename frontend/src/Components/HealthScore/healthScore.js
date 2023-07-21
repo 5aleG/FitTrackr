@@ -9,7 +9,7 @@ import {
 const HealthScore = () => {
   const [expanded, setExpanded] = useState(false); // State to track if the component is expanded or not
   const [healthScore, setHealthScore] = useState(0); // State to track the health score value
-  const actualHealthScore = 75; // API call for HealthScore - static value just for demo
+  const actualHealthScore = 85; // API call for HealthScore - static value just for demo
 
   // Function to handle the click event on the HealthScoreSquare component
   const handleHealthScoreClick = () => {

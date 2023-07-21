@@ -16,12 +16,12 @@ export const HealthScoreSquare = styled.div`
   display: flex;
   align-items: ${({ expanded }) => (expanded ? "flex-start" : "center")};
   flex-direction: ${({ expanded }) => (expanded ? "row" : "row")};
-  background-color: #eeeeee;
+  background-color: var(--button-background-color);
   border-radius: 30px;
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  color: #555555;
+  color: var(--primary-text-color);
   cursor: pointer;
   transition: height 1s, transform 1s;
   ${({ expanded }) =>
