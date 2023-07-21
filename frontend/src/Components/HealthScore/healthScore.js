@@ -9,7 +9,7 @@ import {
 const HealthScore = () => {
   const [expanded, setExpanded] = useState(false); // State to track if the component is expanded or not
   const [healthScore, setHealthScore] = useState(0); // State to track the health score value
-  const actualHealthScore = 80; // API call for HealthScore - static value just for demo
+  const actualHealthScore = 75; // API call for HealthScore - static value just for demo
 
   // Function to handle the click event on the HealthScoreSquare component
   const handleHealthScoreClick = () => {
@@ -19,7 +19,7 @@ const HealthScore = () => {
   // useEffect hook to animate the health score value
   useEffect(() => {
     let startValue = 0; // Initial value for the animation
-    const animationDuration = 1000; // 1000ms = 1 second (Duration of the animation)
+    const animationDuration = 600; // 600ms = 1 second (Duration of the animation)
     const step = (actualHealthScore / animationDuration) * 10; // Calculate the step value for each animation frame
 
     // setInterval function to increment the health score value at regular intervals

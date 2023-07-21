@@ -35,6 +35,12 @@ export const HealthScoreCircle = styled.div`
   min-width: 30px;
   border-radius: 50%;
   background-color: #e67842;
+  background-color: ${({ healthScore }) => {
+    if (healthScore >= 0 && healthScore <= 40) return "#FF6A6A";
+    if (healthScore >= 41 && healthScore <= 70) return "#e67842";
+    if (healthScore >= 71 && healthScore <= 100) return "#28A77B";
+    return "#e67842"; // Default color 
+  }};
   display: flex;
   align-items: center;
   justify-content: center;
