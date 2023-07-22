@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHome, IoMdApps, IoIosStats, IoMdPerson } from 'react-icons/io';
 import { NavbarContainer, IconWrapper, Icon, PlusIcon } from './navbarStyled';
+import DropUpMenu from './DropUpMenu/dropUpMenu';
 
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     let timeoutId;
@@ -30,6 +32,10 @@ const Navbar = () => {
     };
   }, []);
 
+  const handlePlusIconClick = () => {
+    setIsMenuOpen(prevState => !prevState);
+  };
+
   return (
     <NavbarContainer isHidden={isHidden}>
       <IconWrapper>
@@ -40,7 +46,9 @@ const Navbar = () => {
           <IoMdApps size={25} />
         </Icon>
       </IconWrapper>
-      <PlusIcon />
+      <PlusIcon onClick={handlePlusIconClick} isMenuOpen={isMenuOpen}>
+        {isMenuOpen ? 'x' : '+'}
+      </PlusIcon>
       <IconWrapper>
         <Icon>
           <IoIosStats size={25} />
@@ -49,6 +57,7 @@ const Navbar = () => {
           <IoMdPerson size={25} />
         </Icon>
       </IconWrapper>
+      {isMenuOpen && <DropUpMenu />}
     </NavbarContainer>
   );
 };

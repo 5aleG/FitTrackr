@@ -16,7 +16,7 @@ export const FormOverlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@ export const FormContainer = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffffff;
+    background-color: transparent;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -38,8 +38,10 @@ export const FormContainer = styled.div`
 `;
 
 export const FormTitle = styled.h2`
+    color: #fff;
     text-align: center;
     margin-bottom: 20px;
+    font-size: 28px;
 `;
 
 export const Form = styled.form`
@@ -57,27 +59,21 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-    padding: 8px;
+    font-size: 15px;
+    padding: 15px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: 200px;
+    width: 250px;
 `;
 
 export const SubmitButton = styled.button`
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 15px 60px;
+    border-radius: 6px;
     border: none;
-    background-color: #79cff2;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #E57842;
     color: white;
+    margin-top: 5px;
     cursor: pointer;
 `;
-
-export const CloseButton = styled.button`
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: none;
-    background-color: #cfbfba;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    `;

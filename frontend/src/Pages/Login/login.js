@@ -3,7 +3,6 @@ import LoginForm from "../../Components/LoginForm/loginForm";
 import SignUpForm from "../../Components/SignUpForm/signUpForm";
 import {
   BackgroundContainer,
-  MarketingText,
   LoginContainer,
   LoginButton,
   ButtonText,
@@ -47,7 +46,7 @@ const Login = () => {
 
   return (
     <BackgroundContainer>
-      <MarketingText>“ MAKE FITNESS YOUR DAILY HABBIT “</MarketingText>
+      {/* <MarketingText>“ MAKE FITNESS YOUR DAILY HABBIT “</MarketingText> */}
       <LoginContainer>
         <LoginButton onTouchStart={handleLoginTouch}>
           <ButtonText>Login</ButtonText>
@@ -58,7 +57,7 @@ const Login = () => {
       </LoginContainer>
       {showLoginForm && (
         <div ref={loginFormRef}>
-          <LoginForm />
+          <LoginForm onClose={() => console.log('Form closed')} />
         </div>
       )}
       {showSignUpForm && (

@@ -4,7 +4,6 @@ export const MessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-top: 70px;
   padding: 20px;
   color: var(--primary-text-color);
 `;

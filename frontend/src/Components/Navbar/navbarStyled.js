@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { BsPlusCircleFill } from 'react-icons/bs';
+import styled, { css } from 'styled-components';
+import { FaPlus } from 'react-icons/fa'; 
 
 export const NavbarContainer = styled.div`
     position: fixed;
@@ -31,10 +31,33 @@ export const Icon = styled.div`
     margin: 0 20px;
 `;
 
-export const PlusIcon = styled(BsPlusCircleFill)`
-    color: #FFF;
-    font-size: 45px;
+export const PlusIcon = styled(FaPlus)`
+    color: #575899;
     font-weight: bold;
     border-radius: 50%;
-    background-color: #31326F;
-    `;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    position: relative;
+    padding: 9px;
+    height: 30px;
+    width: 30px;
+
+    &::after {
+        content: '+';
+        color: #fff;
+        font-size: 24px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    ${props =>
+        props.isMenuOpen &&
+        css`
+        transform: rotate(45deg);
+        color: #FF6A6A;
+        background-color: #fff;
+        `}
+`;

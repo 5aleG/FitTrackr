@@ -4,12 +4,11 @@ import { FormOverlay,
     FormTitle,
     Form,
     FormField,
-    Label,
     Input,
     SubmitButton,
-    CloseButton, } from "./signUpFormStyled"
+   } from "./signUpFormStyled"
 
-const SignUpForm = ( {onClose}) => {
+const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -45,7 +44,6 @@ const SignUpForm = ( {onClose}) => {
           <FormTitle>Sign Up</FormTitle>
           <Form onSubmit={handleSubmit}>
             <FormField>
-              <Label>Username</Label>
               <Input
                 type="text"
                 value={username}
@@ -54,7 +52,6 @@ const SignUpForm = ( {onClose}) => {
               />
             </FormField>
             <FormField>
-              <Label>Email</Label>
               <Input
                 type="email"
                 value={email}
@@ -63,7 +60,6 @@ const SignUpForm = ( {onClose}) => {
               />
             </FormField>
             <FormField>
-              <Label>Password</Label>
               <Input
                 type="password"
                 value={password}
@@ -73,7 +69,6 @@ const SignUpForm = ( {onClose}) => {
             </FormField>
             <SubmitButton type="submit">Submit</SubmitButton>
           </Form>
-          <CloseButton onClick={onClose}>Close</CloseButton>
         </FormContainer>
       </FormOverlay>
     )
