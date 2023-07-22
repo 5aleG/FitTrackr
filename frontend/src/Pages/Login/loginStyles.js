@@ -12,19 +12,19 @@ export const BackgroundContainer = styled.div`
     background-size: cover;
 `;
 
-export const MarketingText = styled.h1`
-    width: 164px;
-    height: 500px;
-    position: absolute;
-    left: 46px;
-    top: 45px;
-    color: #FFF;
-    font-family: 'Teko', sans-serif;
-    font-size: 50px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-`
+// export const MarketingText = styled.h1`
+//     width: 164px;
+//     height: 500px;
+//     position: absolute;
+//     left: 46px;
+//     top: 45px;
+//     color: #FFF;
+//     font-family: 'Teko', sans-serif;
+//     font-size: 50px;
+//     font-style: normal;
+//     font-weight: 600;
+//     line-height: normal;
+// `
 
 export const LoginContainer = styled.div`
     display: flex;

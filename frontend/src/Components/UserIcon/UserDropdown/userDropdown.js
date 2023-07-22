@@ -1,16 +1,17 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { UserDropdownContainer, DropdownItem } from './userDropdownStyled';
 
 const UserDropdown = () => {
   // Handle logout logic here
-  const handleLogout = () => {
-    // Add your logout logic here
-    console.log('User logged out!');
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
   };
 
   return (
     <UserDropdownContainer>
-      <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+      <DropdownItem onClick={handleClick}>Logout</DropdownItem>
     </UserDropdownContainer>
   );
 };
