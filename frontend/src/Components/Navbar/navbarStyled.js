@@ -28,7 +28,7 @@ export const IconWrapper = styled.div`
 
 export const Icon = styled.div`
     color: #FFF;
-    margin: 0 20px;
+    margin: 0 15px;
 `;
 
 export const PlusIcon = styled(FaPlus)`
