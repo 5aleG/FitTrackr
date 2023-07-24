@@ -1,73 +1,83 @@
-import React, { useState, useRef, useEffect } from "react";
-import LoginForm from "../../Components/LoginForm/loginForm";
-import SignUpForm from "../../Components/SignUpForm/signUpForm";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaUser, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import {
-  BackgroundContainer,
   LoginContainer,
+  HelloText,
+  WelcomeText,
+  InputContainer,
+  Icon,
+  Input,
+  ForgotPassword,
   LoginButton,
-  ButtonText,
-  SignUpButton,
-} from "./loginStyles";
+  RegisterText,
+} from './loginStyles';
 
 const Login = () => {
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({ username: '', password: '' });
 
-  const loginFormRef = useRef(null);
-  const signUpFormRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        loginFormRef.current &&
-        !loginFormRef.current.contains(e.target) &&
-        signUpFormRef.current &&
-        !signUpFormRef.current.contains(e.target)
-      ) {
-        closeForms();
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
-
-  const handleLoginTouch = () => {
-    setShowLoginForm(true);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
-  const handleSignUpTouch = () => {
-    setShowSignUpForm(true);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/home');
   };
 
-  const closeForms = () => {
-    setShowLoginForm(false);
-    setShowSignUpForm(false);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Username:', formData.username);
+    console.log('Password:', formData.password);
+    // Perform the login logic here
   };
 
   return (
-    <BackgroundContainer>
-      {/* <MarketingText>“ MAKE FITNESS YOUR DAILY HABBIT “</MarketingText> */}
-      <LoginContainer>
-        <LoginButton onTouchStart={handleLoginTouch}>
-          <ButtonText>Login</ButtonText>
-        </LoginButton>
-        <SignUpButton onTouchStart={handleSignUpTouch}>
-          <ButtonText>Sign Up</ButtonText>
-        </SignUpButton>
-      </LoginContainer>
-      {showLoginForm && (
-        <div ref={loginFormRef}>
-          <LoginForm onClose={() => console.log('Form closed')} />
-        </div>
-      )}
-      {showSignUpForm && (
-        <div ref={signUpFormRef}>
-          <SignUpForm />
-        </div>
-      )}
-    </BackgroundContainer>
+    <LoginContainer>
+      <HelloText>Hey there,</HelloText>
+      <WelcomeText>Welcome Back</WelcomeText>
+      <form onSubmit={handleSubmit}>
+        <InputContainer>
+          <Icon>
+            <FaUser />
+          </Icon>
+          <Input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Icon>
+            <FaLock />
+          </Icon>
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            autoComplete="current-password" // Add autoComplete attribute here
+          />
+          <Icon onClick={handleShowPassword}>
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </Icon>
+        </InputContainer>
+        <ForgotPassword>Forgot password?</ForgotPassword>
+        <LoginButton type="submit" onClick={handleClick}>Login</LoginButton>
+      </form>
+      <RegisterText>Don't have an account yet? Register</RegisterText>
+    </LoginContainer>
   );
 };
 
 export default Login;
-
