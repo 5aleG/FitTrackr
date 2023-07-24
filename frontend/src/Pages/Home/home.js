@@ -3,7 +3,7 @@ import Navbar from '../../Components/Navbar/navbar';
 import GreetingMessage from '../../Components/GreetingMessage/greetingMessage';
 import HealthScore from '../../Components/HealthScore/healthScore';
 import CalorieCount from '../../Components/CalorieCount/calorieCount';
-import { TodayText } from './homeStyled';
+import { TodayText, HomeWrapper } from './homeStyled';
 import WeightCount from '../../Components/WeightCount/weightCount';
 import UserIcon from '../../Components/UserIcon/userIcon';
 import WaterIntake from '../../Components/WaterIntake/waterIntake';
@@ -12,7 +12,7 @@ import DarkModeToggle from '../../Components/DarkmodeToggle/darkmodeToggle'; // 
 
 const Home = ({ darkMode }) => {
     return(
-        <>
+        <HomeWrapper>
             <DarkModeToggle darkMode={darkMode} /> 
             <UserIcon />
             <GreetingMessage darkMode={darkMode} /> 
@@ -23,7 +23,7 @@ const Home = ({ darkMode }) => {
             <WaterIntake />
             <WeightCount />
             <Workout />
-        </>
+        </HomeWrapper>
     )
 };
 

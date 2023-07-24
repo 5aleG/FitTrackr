@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const HomeWrapper = styled.div`
+  padding-bottom: 150px;
+`
+
 export const TodayText = styled.div`
   font-size: 24px;
   font-weight: 600;

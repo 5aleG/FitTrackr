@@ -16,6 +16,7 @@ export const NavbarContainer = styled.div`
     border-radius: 40px;
     padding: 0 20px;
     transition: bottom 0.3s;
+    z-index: 9999;
 `;
 
 
@@ -40,8 +41,8 @@ export const PlusIcon = styled(FaPlus)`
     transition: transform 0.3s, background-color 0.3s;
     position: relative;
     padding: 9px;
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
 
     &::after {
         content: '+';
