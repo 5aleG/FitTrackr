@@ -20,6 +20,12 @@ export const WelcomeText = styled.h2`
     margin-bottom: 50px;
 `
 
+export const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`
+
 export const InputContainer = styled.div`
     display: flex;
     align-items: center;
@@ -65,7 +71,6 @@ export const LoginButton = styled.button`
     border: none;
     border-radius: 40px;
     margin-bottom: 20px;
-    width: 315px;
     height: 60px;
     cursor: pointer;
     transition: background-color 0.3s;
