@@ -5,6 +5,7 @@ import {
   LoginContainer,
   HelloText,
   WelcomeText,
+  FormContainer,
   InputContainer,
   Icon,
   Input,
@@ -43,7 +44,7 @@ const Login = () => {
     <LoginContainer>
       <HelloText>Hey there,</HelloText>
       <WelcomeText>Welcome Back</WelcomeText>
-      <form onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleSubmit}>
         <InputContainer>
           <Icon>
             <FaUser />
@@ -74,7 +75,7 @@ const Login = () => {
         </InputContainer>
         <ForgotPassword>Forgot password?</ForgotPassword>
         <LoginButton type="submit" onClick={handleClick}>Login</LoginButton>
-      </form>
+      </FormContainer>
       <RegisterText>Don't have an account yet? Register</RegisterText>
     </LoginContainer>
   );
