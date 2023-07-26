@@ -33,6 +33,7 @@ export const WaterIntakeSquare = styled.div`
     `}
 `;
 
+//The problem is here
 export const WaterIntakeInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -95,3 +96,8 @@ export const ExpandableText = styled.div`
     margin-right: 15px;
   }
 `;
+
+export const CircularProgressbarWrapper = styled.div`
+  width: 460px;
+  margin-left: auto;
+`

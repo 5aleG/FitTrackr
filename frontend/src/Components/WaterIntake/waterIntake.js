@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { FaTint } from 'react-icons/fa';
 import {
   WaterIntakeSquare,
   WaterIntakeInfo,
   DailyWater,
   WaterNumber,
   Liters,
-  WaterIntakeImage,
   AverageContainer,
   AverageLabel,
   AverageValue,
   DateLabel,
-  ExpandableText
+  ExpandableText,
+  CircularProgressbarWrapper
 } from './waterIntakeStyled';
-import { FaTint } from 'react-icons/fa';
-
-const waterGraphImage = require('../../Assets/water_intake_graph.svg').default;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -24,7 +24,8 @@ const formatDate = (dateString) => {
 const WaterIntake = () => {
   const [expanded, setExpanded] = useState(false);
   const [waterIntake, setWaterIntake] = useState(0);
-  const dailyWaterIntake = 1.6; // Dummy Data
+  const dailyWaterIntake = 1.3; // Dummy Data
+  const dailyWaterGoal = 3 //Dummy data
 
   const handleWaterIntakeClick = () => {
     setExpanded(!expanded);
@@ -59,6 +60,11 @@ const WaterIntake = () => {
   // Calculate the average of the last 7 days (excluding "Today")
   const averageWaterIntake = previousDaysData.slice(1).reduce((sum, dayData) => sum + dayData.waterIntake, 0) / 6;
 
+  // Calculate the progress percentage based on the daily water intake and goal
+  let progressPercentage = (waterIntake / dailyWaterGoal) * 100;
+  if (waterIntake > dailyWaterGoal) {
+    progressPercentage = 100;
+  }
   return (
     <WaterIntakeSquare onClick={handleWaterIntakeClick} expanded={expanded}>
       <WaterIntakeInfo>
@@ -71,7 +77,7 @@ const WaterIntake = () => {
             <AverageLabel>Average of the Last 7 Days:</AverageLabel>
             <AverageValue>{averageWaterIntake.toFixed(2)} Liters</AverageValue>
           </AverageContainer>
-        )} 
+        )}
         <ExpandableText expanded={expanded}>
           {previousDaysData.map((dayData, index) => (
             <div key={index}>
@@ -81,9 +87,31 @@ const WaterIntake = () => {
           ))}
         </ExpandableText>
       </WaterIntakeInfo>
-      {!expanded && <WaterIntakeImage src={waterGraphImage} alt="Water Intake Image" />}
+      {!expanded && <CircularProgressbarWrapper>
+          <CircularProgressbar
+            value={progressPercentage}
+            text={`${dailyWaterIntake} / ${dailyWaterGoal} Liters`}
+            styles={{
+              path: {
+                stroke: `#2083FF`,
+                strokeWidth: 7,
+                strokeLinecap: 'round',
+              },
+              trail: {
+                stroke: '#DCEBFF',
+                strokeWidth: 7,
+              },
+              text: {
+                fill: 'var(--primary-text-color)',
+                fontSize: '10px',
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </CircularProgressbarWrapper>}
     </WaterIntakeSquare>
   );
 };
 
 export default WaterIntake;
+

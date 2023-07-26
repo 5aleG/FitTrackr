@@ -96,3 +96,7 @@ export const ExpandableText = styled.div`
   }
 `;
 
+export const CircularProgressbarWrapper = styled.div`
+  width: 460px;
+  margin-left: auto;
+`

@@ -54,12 +54,6 @@ export const Minutes = styled.span`
   font-weight: normal;
 `;
 
-export const WorkoutImage = styled.img`
-  width: 110px;
-  height: 70px;
-  margin-left: auto;
-`;
-
 export const AverageContainer = styled.div`
   font-size: 14px;
   margin-top: 10px;
@@ -95,3 +89,8 @@ export const ExpandableText = styled.div`
     margin-right: 15px;
   }
 `;
+
+export const CircularProgressbarWrapper = styled.div`
+  width: 330px;
+  margin-left: auto;
+`

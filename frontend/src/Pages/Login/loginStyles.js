@@ -10,6 +10,7 @@ export const LoginContainer = styled.div`
 
 export const HelloText = styled.h2`
     font-weight: normal;
+    color: var(--primary-text-color);
     margin-top: 100px;
     margin-bottom: 10px;
 `;
@@ -17,6 +18,7 @@ export const HelloText = styled.h2`
 export const WelcomeText = styled.h2`
     font-weight: bold;
     font-size: 24px;
+    color: var(--primary-text-color);
     margin-bottom: 50px;
 `
 
@@ -81,5 +83,5 @@ export const LoginButton = styled.button`
 `;
 
 export const RegisterText = styled.p`
-  color: #000;
+    color: var(--primary-text-color);
 `;

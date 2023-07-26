@@ -54,12 +54,6 @@ export const Kcal = styled.span`
   font-weight: normal;
 `;
 
-export const CalorieImage = styled.img`
-  width: 110px;
-  height: 70px;
-  margin-left: auto;
-`;
-
 export const AverageContainer = styled.div`
   font-size: 14px;
   margin-top: 10px;
@@ -96,3 +90,7 @@ export const ExpandableText = styled.div`
   }
 `;
 
+export const CircularProgressbarWrapper = styled.div`
+  width: 460px;
+  margin-left: auto;
+`

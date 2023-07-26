@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import {
   CalorieCountSquare,
   CalorieCountInfo,
   DailyCalorie,
   BigCalories,
   Kcal,
-  CalorieImage,
+  CircularProgressbarWrapper,
   AverageContainer,
   AverageLabel,
   AverageValue,
@@ -13,8 +15,6 @@ import {
   ExpandableText,
 } from "./calorieCountStyled";
 import { PiBowlFoodDuotone } from "react-icons/pi";
-
-const calGraphImage = require("../../Assets/cal_graph.svg").default;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -25,6 +25,7 @@ const CalorieCount = () => {
   const [expanded, setExpanded] = useState(false);
   const [calories, setCalories] = useState(0);
   const dailyCalories = 1856; // Dummy data
+  const dailyaCaloriesGoal = 2500; //Dummy data
 
   const handleCalorieCountClick = () => {
     setExpanded(!expanded);
@@ -59,6 +60,11 @@ const CalorieCount = () => {
   // Calculate the average of the last 7 days (excluding "Today")
   const averageCalories = previousDaysData.slice(1).reduce((sum, dayData) => sum + dayData.calories, 0) / 6;
 
+  let progressPercentage = (calories / dailyaCaloriesGoal) * 100;
+  if (calories > dailyaCaloriesGoal) {
+    progressPercentage = 100;
+  }
+
   return (
     <CalorieCountSquare onClick={handleCalorieCountClick} expanded={expanded}>
       <CalorieCountInfo>
@@ -81,7 +87,28 @@ const CalorieCount = () => {
           ))}
         </ExpandableText>
       </CalorieCountInfo>
-      {!expanded && <CalorieImage src={calGraphImage} alt="Calorie Image" />}
+      {!expanded && <CircularProgressbarWrapper>
+          <CircularProgressbar
+            value={progressPercentage}
+            text={`${dailyCalories} / ${dailyaCaloriesGoal} cal`}
+            styles={{
+              path: {
+                stroke: `#78C4D3`,
+                strokeWidth: 7,
+                strokeLinecap: 'round',
+              },
+              trail: {
+                stroke: '#EBF5F8',
+                strokeWidth: 7,
+              },
+              text: {
+                fill: 'var(--primary-text-color)',
+                fontSize: '10px',
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </CircularProgressbarWrapper>}
     </CalorieCountSquare>
   );
 };

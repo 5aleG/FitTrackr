@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { 
+  WorkoutSquare, 
+  WorkoutInfo, 
+  DailyWorkout, 
+  WorkoutNumber, 
+  Minutes, 
+  CircularProgressbarWrapper, 
+  AverageContainer, 
+  AverageLabel, 
+  AverageValue, 
+  DateLabel, 
+  ExpandableText 
+} from "./workoutStyled";
 import { FaDumbbell } from 'react-icons/fa';
-import { WorkoutSquare, WorkoutInfo, DailyWorkout, WorkoutNumber, Minutes, WorkoutImage, AverageContainer, AverageLabel, AverageValue, DateLabel, ExpandableText } from "./workoutStyled";
-
-const workOutGraph = require("../../Assets/workout_graph.svg").default;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -12,8 +24,8 @@ const formatDate = (dateString) => {
 const Workout = () => {
   const [expanded, setExpanded] = useState(false);
   const [workoutCount, setWorkoutCount] = useState(0);
-  // API call for users daily workout count
-  const dailyWorkout = 50; // Example
+  const dailyWorkout = 50; // Dummy Data
+  const dailyWorkoutGoal = 60; // Dummy Data
 
   const handleWorkoutClick = () => {
     setExpanded(!expanded);
@@ -45,6 +57,11 @@ const Workout = () => {
 
   const averageWorkout = previousDaysData.slice(1).reduce((sum, dayData) => sum + dayData.workoutCount, 0) / 6;
 
+  let progressPercentage = (dailyWorkout / dailyWorkoutGoal) * 100;
+  if (dailyWorkout > dailyWorkoutGoal) {
+    progressPercentage = 100;
+  }
+
   return (
     <WorkoutSquare onClick={handleWorkoutClick} expanded={expanded}>
       <WorkoutInfo>
@@ -67,7 +84,28 @@ const Workout = () => {
           ))}
         </ExpandableText>
       </WorkoutInfo>
-      <WorkoutImage src={workOutGraph} alt="Workout Image" />
+      {!expanded && <CircularProgressbarWrapper>
+          <CircularProgressbar
+            value={progressPercentage}
+            text={`${dailyWorkout} / ${dailyWorkoutGoal} Min`}
+            styles={{
+              path: {
+                stroke: `#E67842`,
+                strokeWidth: 7,
+                strokeLinecap: 'round',
+              },
+              trail: {
+                stroke: '#FEECE3',
+                strokeWidth: 7,
+              },
+              text: {
+                fill: 'var(--primary-text-color)',
+                fontSize: '10px',
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </CircularProgressbarWrapper>}
     </WorkoutSquare>
   );
 };
