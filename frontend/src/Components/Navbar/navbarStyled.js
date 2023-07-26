@@ -45,7 +45,7 @@ export const PlusIcon = styled(FaPlus)`
     transition: transform 0.3s, background-color 0.3s;
     position: relative;
     padding: 9px;
-    height: 28©px;
+    height: 28px;
     width: 28px;
 
     &::after {

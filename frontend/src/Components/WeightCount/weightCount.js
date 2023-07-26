@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { 
   CurrentWeightSquare, 
   CurrentWeightInfo, 
   WeightRecord, 
   WeightRecordNumber, 
   KgLabel, 
-  WeightImage, 
+  CircularProgressbarWrapper, 
   AverageContainer, 
   AverageLabel, 
   AverageValue,
@@ -13,8 +15,6 @@ import {
   ExpandableText,
 } from './weightCountStyled';
 import { FaWeight } from 'react-icons/fa';
-
-const weightGraphImage = require('../../Assets/weight_graph.svg').default;
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -24,7 +24,8 @@ const formatDate = (dateString) => {
 const WeightCount = () => {
   const [expanded, setExpanded] = useState(false);
   const [currentWeight, setCurrentWeight] = useState(0); // Set a default value for the current weight (dummy data)
-  const startingWeight = 90; // Dummy data for the user's starting weight
+  const startingWeight = 95; // Dummy data for the user's starting weight
+  const weightGoal = 80;
 
   const weeklyWeightEntries = useMemo(() => [
     { date: formatDate(new Date()), weight: currentWeight },
@@ -41,6 +42,11 @@ const WeightCount = () => {
   const handleWeightCountClick = () => {
     setExpanded(!expanded);
   };
+
+  let progressPercentage = (weightGoal / currentWeight) * 100;
+  if (progressPercentage > 100) {
+    progressPercentage = 100;
+  }
 
   useEffect(() => {
     let startValue = startingWeight;
@@ -85,7 +91,28 @@ const WeightCount = () => {
           ))}
         </ExpandableText>
       </CurrentWeightInfo>
-      {!expanded && <WeightImage src={weightGraphImage} alt='Weight Image' />}
+      {!expanded && <CircularProgressbarWrapper>
+          <CircularProgressbar
+            value={progressPercentage}
+            text={`${currentWeight} / ${weightGoal} Kg`}
+            styles={{
+              path: {
+                stroke: `#FFC83B`,
+                strokeWidth: 7,
+                strokeLinecap: 'round',
+              },
+              trail: {
+                stroke: '#F8F2E3',
+                strokeWidth: 7,
+              },
+              text: {
+                fill: 'var(--primary-text-color)',
+                fontSize: '10px',
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </CircularProgressbarWrapper>}
     </CurrentWeightSquare>
   );
 };
