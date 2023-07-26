@@ -28,8 +28,12 @@ export const IconWrapper = styled.div`
     `;
 
 export const Icon = styled.div`
-    color: #FFF;
-    margin: 0 15px;
+  color: #FFF;
+  margin: 0 15px;
+
+  ${props => props.isActive && css`
+    color: #fff;
+  `}
 `;
 
 export const PlusIcon = styled(FaPlus)`
@@ -41,7 +45,7 @@ export const PlusIcon = styled(FaPlus)`
     transition: transform 0.3s, background-color 0.3s;
     position: relative;
     padding: 9px;
-    height: 28px;
+    height: 28©px;
     width: 28px;
 
     &::after {
