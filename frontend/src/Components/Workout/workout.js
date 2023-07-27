@@ -90,12 +90,12 @@ const Workout = () => {
             text={`${dailyWorkout} / ${dailyWorkoutGoal} Min`}
             styles={{
               path: {
-                stroke: `#E67842`,
+                stroke: `#78C4D3`,
                 strokeWidth: 7,
                 strokeLinecap: 'round',
               },
               trail: {
-                stroke: '#FEECE3',
+                stroke: '#EBF5F8',
                 strokeWidth: 7,
               },
               text: {
