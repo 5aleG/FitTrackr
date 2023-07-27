@@ -97,12 +97,12 @@ const WeightCount = () => {
             text={`${currentWeight} / ${weightGoal} Kg`}
             styles={{
               path: {
-                stroke: `#FFC83B`,
+                stroke: `#78C4D3`,
                 strokeWidth: 7,
                 strokeLinecap: 'round',
               },
               trail: {
-                stroke: '#F8F2E3',
+                stroke: '#EBF5F8',
                 strokeWidth: 7,
               },
               text: {

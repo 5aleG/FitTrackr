@@ -24,7 +24,7 @@ const formatDate = (dateString) => {
 const WaterIntake = () => {
   const [expanded, setExpanded] = useState(false);
   const [waterIntake, setWaterIntake] = useState(0);
-  const dailyWaterIntake = 1.3; // Dummy Data
+  const dailyWaterIntake = 1.8; // Dummy Data
   const dailyWaterGoal = 3 //Dummy data
 
   const handleWaterIntakeClick = () => {
@@ -93,12 +93,12 @@ const WaterIntake = () => {
             text={`${dailyWaterIntake} / ${dailyWaterGoal} Liters`}
             styles={{
               path: {
-                stroke: `#2083FF`,
+                stroke: `#78C4D3`,
                 strokeWidth: 7,
                 strokeLinecap: 'round',
               },
               trail: {
-                stroke: '#DCEBFF',
+                stroke: '#EBF5F8',
                 strokeWidth: 7,
               },
               text: {

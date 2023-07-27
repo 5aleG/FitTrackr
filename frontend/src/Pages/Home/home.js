@@ -15,7 +15,7 @@ const Home = ({ darkMode }) => {
         <HomeWrapper>
             <DarkModeToggle darkMode={darkMode} /> 
             <UserIcon />
-            <GreetingMessage darkMode={darkMode} /> 
+            <GreetingMessage /> 
             <Navbar />
             <HealthScore />
             <TodayText>Today</TodayText>
