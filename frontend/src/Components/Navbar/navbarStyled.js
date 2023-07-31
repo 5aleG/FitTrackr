@@ -28,12 +28,23 @@ export const IconWrapper = styled.div`
     `;
 
 export const Icon = styled.div`
-  color: #FFF;
-  margin: 0 15px;
+    color: #FFF;
+    margin: 0 15px;
+    text-decoration: none;
+    outline: none;
 
-  ${props => props.isActive && css`
-    color: #fff;
-  `}
+    ${props => props.isActive && css`
+      color: #fff;
+    `}
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: inherit;
+  }
 `;
 
 export const PlusIcon = styled(FaPlus)`

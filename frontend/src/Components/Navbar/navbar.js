@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { IoMdHome, IoMdApps, IoIosStats, IoMdPerson } from 'react-icons/io';
 import { NavbarContainer, IconWrapper, Icon, PlusIcon } from './navbarStyled';
 import DropUpMenu from './DropUpMenu/dropUpMenu';
@@ -42,7 +42,9 @@ const Navbar = () => {
     <NavbarContainer isHidden={isHidden}>
       <IconWrapper>
         <Icon isActive={location.pathname === '/home'}>
-          <IoMdHome size={25} />
+          <Link to='/home'>
+            <IoMdHome size={25} />
+          </Link>
         </Icon>
         <Icon>
           <IoMdApps size={25} />
@@ -53,7 +55,9 @@ const Navbar = () => {
       </PlusIcon>
       <IconWrapper>
         <Icon>
-          <IoIosStats size={25} />
+          <Link to='/statistics'>
+            <IoIosStats size={25} />
+          </Link>
         </Icon>
         <Icon>
           <IoMdPerson size={25} />
