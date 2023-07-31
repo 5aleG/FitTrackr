@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import Login from "./Pages/Login/login"
 import Home from "./Pages/Home/home";
+import Statistics from "./Pages/Statistics/statistics";
 
 const App = () => {
   const isMobile = useMediaQuery({ maxWidth: 767, minWidth: 360 });
@@ -13,11 +14,13 @@ const App = () => {
         <>
           <Route path="/" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
           <Route path="/home" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
+          <Route path="/statistics" element={<DesktopOnlyWarning>Only available on mobile</DesktopOnlyWarning>} />
         </>
       ) : (
         <>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/statistics" element={<Statistics />} />
         </>
       )}
     </Routes>

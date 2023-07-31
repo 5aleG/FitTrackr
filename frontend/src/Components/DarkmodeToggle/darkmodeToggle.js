@@ -1,23 +1,29 @@
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToggleWrapper, ToggleIcon } from "./darkmodeToggleStyled";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const DarkModeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const storedDarkMode = localStorage.getItem('darkmode')
+    return storedDarkMode === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('darkmode', isDarkMode);
+    isDarkMode ? setDarkMode() : setLightMode();
+  }, [isDarkMode])
 
   const toggleLight = () => {
     setIsDarkMode(false);
-    setCSSVariablesLight();
+    setLightMode();
   };
 
   const toggleDark = () => {
     setIsDarkMode(true);
-    setCSSVariablesDark();
+    setDarkMode();
   };
 
-  const setCSSVariablesLight = () => {
+  const setLightMode = () => {
     const root = document.documentElement;
     root.style.setProperty("--background-color", "#FAFAFA");
     root.style.setProperty("--plate-color", "#FFFFFF");
@@ -29,7 +35,7 @@ const DarkModeToggle = () => {
     root.style.setProperty("--box-shadow-color", "#E4EAF1");
   };
 
-  const setCSSVariablesDark = () => {
+  const setDarkMode = () => {
     const root = document.documentElement;
     root.style.setProperty("--background-color", "#151515");
     root.style.setProperty("--plate-color", "#121212");
@@ -51,4 +57,3 @@ const DarkModeToggle = () => {
 };
 
 export default DarkModeToggle;
-

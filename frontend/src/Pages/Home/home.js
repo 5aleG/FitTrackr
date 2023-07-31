@@ -8,7 +8,7 @@ import WeightCount from '../../Components/WeightCount/weightCount';
 import UserIcon from '../../Components/UserIcon/userIcon';
 import WaterIntake from '../../Components/WaterIntake/waterIntake';
 import Workout from '../../Components/Workout/workout';
-import DarkModeToggle from '../../Components/DarkmodeToggle/darkmodeToggle'; // Adjust the path accordingly
+import DarkModeToggle from '../../Components/DarkmodeToggle/darkmodeToggle';
 
 const Home = ({ darkMode }) => {
     return(
