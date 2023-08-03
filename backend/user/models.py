@@ -7,7 +7,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     first_name = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
