@@ -11,7 +11,7 @@ export const DropUpContainer = styled.div`
     justify-content: center;
     width: 95%;
     min-height: 100px;
-    background-color: #575899;
+    background-color: #4F9AA9;
     border-radius: 40px;
     padding: 10px;
     ${(props) => props.expanded && 'max-height: 300px;'} 
@@ -48,15 +48,15 @@ export const FormField = styled.div`
 
     input[type="number"] {
         width: 120px;
-        background-color: #6F70C0;
+        background-color: #6EBCCC;
         color: #fff;
         padding: 10px;
-        border: 1px solid #8E8FF5;
+        border: 1px solid #408390;
         border-radius: 4px;
 
         
         &::placeholder {
-        color: #C0C1F8;
+        color: #fff;
         }
     }
         button {

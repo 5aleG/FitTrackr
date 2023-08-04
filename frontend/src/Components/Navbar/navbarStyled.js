@@ -12,7 +12,7 @@ export const NavbarContainer = styled.div`
     width: 80%;
     max-width: 500px;
     height: 65px;
-    background-color: #575899;
+    background-color: #4F9AA9;
     border-radius: 40px;
     padding: 0 20px;
     transition: bottom 0.3s;
@@ -48,7 +48,7 @@ export const Icon = styled.div`
 `;
 
 export const PlusIcon = styled(FaPlus)`
-    color: #575899;
+    color: #4F9AA9;
     font-weight: bold;
     border-radius: 50%;
     background-color: #fff;
