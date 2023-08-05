@@ -60,7 +60,9 @@ const Navbar = () => {
           </Link>
         </Icon>
         <Icon>
-          <IoMdPerson size={25} />
+          <Link to='/userprofile'>
+            <IoMdPerson size={25} />
+          </Link>
         </Icon>
       </IconWrapper>
       {isMenuOpen && <DropUpMenu />}
