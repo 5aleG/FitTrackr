@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, {useState, useEffect } from 'react'
 import { 
     UserProfileSquare, 
     UserEditAvatarContainer,
@@ -15,20 +15,52 @@ import UserIcon from '../../Components/UserIcon/userIcon';
 import { FaPencilAlt } from 'react-icons/fa';
 import DarkmodeToggle from '../../Components/DarkmodeToggle/darkmodeToggle';
 import Navbar from '../../Components/Navbar/navbar';
+import fitTrackrAPI from '../../Axios/fitTrackrAPI';
 
 const userAvatar = require('../../Assets/user_avatar.svg').default;
 
 const UserProfile = () => {
-    const [formData, setFormData] = useState();
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    }
-
+    const [formData, setFormData] = useState({
+      email: '',
+      password: '',
+      first_name: '',
+      last_name: '',
+    });
+    const [isLoading, setIsLoading] = useState(true);
+  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        const response = await fitTrackrAPI.post('/user/profile/', formData);
+        console.log('API Response:', response.data);
+      } catch (error) {
+        console.error('API Error:', error);
+      }
+    };
+  
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+      const { name, value } = event.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const response = await fitTrackrAPI.get('/user/');
+          setFormData(response.data[0]);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('API Error:', error);
+          setIsLoading(false);
+        }
       };
+  
+      fetchUserData();
+    }, []);
+  
+    if (isLoading) {
+      return null; // Or show a loading spinner
+    }
 
     return (
         <>
@@ -50,7 +82,7 @@ const UserProfile = () => {
                         <Input
                         type='text'
                         name='email'
-                        placeholder='user@email.com'
+                        placeholder={formData.email}
                         onChange={handleInputChange}
                         >
                         </Input>
@@ -70,7 +102,7 @@ const UserProfile = () => {
                     <Input
                         type='text'
                         name='first_name'
-                        placeholder='Sasha'
+                        placeholder={formData.first_name}
                         onChange={handleInputChange}
                         >
                         </Input>
@@ -80,11 +112,12 @@ const UserProfile = () => {
                     <Input
                         type='text'
                         name='last_name'
-                        placeholder='Golijanin'
+                        placeholder={formData.last_name}
                         onChange={handleInputChange}
                         >
                         </Input>
                     </UserInputContainer>
+                    <button type="submit">Submit</button> {/* Add the submit button here */}
                 </UserFormContainer>
             </UserProfileSquare>
             <Navbar />
