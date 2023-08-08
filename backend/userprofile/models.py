@@ -14,6 +14,8 @@ class UserProfile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    first_name = models.CharField(max_length=50, default='', blank=True)
+    last_name = models.CharField(max_length=50, default='', blank=True)
     age = models.IntegerField()
     height = models.FloatField()
     weight = models.FloatField()
@@ -24,4 +26,4 @@ class UserProfile(models.Model):
     # water_intake_data = models.ForeignKey(to=WaterIntData, on_delete=models.CASCADE, related_name='user_workout_data')
 
     def __str__(self):
-        return '__all__'
+        return str(self.user.username)
