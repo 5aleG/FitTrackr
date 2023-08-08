@@ -44,6 +44,7 @@ const Login = () => {
         const data = response.data;
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("refresh_token", data.refresh);
+        localStorage.setItem("user_id", data.user_id);
         dispatch(updateUserData({ username: formData.username })); 
         localStorage.setItem('userInfo', JSON.stringify({ username: formData.username }));
         navigate('/home'); 
@@ -70,6 +71,7 @@ const Login = () => {
             placeholder="Username"
             value={formData.username}
             onChange={handleInputChange}
+            autoComplete='username'
           />
         </InputContainer>
         <InputContainer>

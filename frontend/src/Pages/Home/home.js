@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../../Components/Navbar/navbar';
 import GreetingMessage from '../../Components/GreetingMessage/greetingMessage';
 import HealthScore from '../../Components/HealthScore/healthScore';
@@ -9,8 +9,18 @@ import UserIcon from '../../Components/UserIcon/userIcon';
 import WaterIntake from '../../Components/WaterIntake/waterIntake';
 import Workout from '../../Components/Workout/workout';
 import DarkModeToggle from '../../Components/DarkmodeToggle/darkmodeToggle';
+import { useNavigate } from 'react-router-dom';
 
 const Home = ({ darkMode }) => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+      const access_token = localStorage.getItem('access_token');
+      if (!access_token) {
+        navigate('/');
+      }
+    }, [navigate]);
+
     return(
         <HomeWrapper>
             <DarkModeToggle darkMode={darkMode} /> 

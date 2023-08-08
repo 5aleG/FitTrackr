@@ -1,12 +1,22 @@
 import axios from "axios";
 
-// const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
-// const baseURL = isDev ? 'http://localhost:8001/backend/api/v1' : 'http://142.93.166.27/backend/api/v1/'
-
 const baseURL = 'http://localhost:8001/backend/api/v1';
 
 const fitTrackrAPI = axios.create({
   baseURL: baseURL
-})
+});
+
+fitTrackrAPI.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default fitTrackrAPI;
