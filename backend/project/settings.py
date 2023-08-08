@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -15,6 +16,9 @@ SECRET_KEY = 'django-insecure-npi3#xfk9%uj82^(2qx0d*ri3momuqxw0a7r%_z#25^&4c&s7y
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ["localhost"]
+
+CSRF_TRUSTED_ORIGINS = ["localhost" 'http://127.0.0.1']
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -134,6 +138,11 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ]
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=5)
 }
 
 AUTH_USER_MODEL = "user.User"  # app_name.model_name
