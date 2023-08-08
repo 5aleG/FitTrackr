@@ -10,7 +10,7 @@ const GreetingMessage = () => {
 
   useEffect(() => {
     fitTrackrAPI
-      .get('/user/')
+      .get('/user/users/')
       .then((response) => {
         setUser(response.data[0]);
         setIsLoading(false);
