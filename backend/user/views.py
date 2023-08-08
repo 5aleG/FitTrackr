@@ -1,6 +1,9 @@
 from rest_framework import generics
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, CustomTokenObtainPairSerializer
+from .permissions import IsUserOrReadOnly
 
 
 class UserList(generics.ListCreateAPIView):
@@ -11,12 +14,17 @@ class UserList(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
 
-class UserProfileView(generics.RetrieveUpdateAPIView):
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve and update the current user's profile
+    Retrieve, update or delete a specific user.
     """
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-    http_method_names = ['get', 'patch', 'post']
+    permission_classes = [IsUserOrReadOnly]
 
-    def get_object(self):
-        return self.request.user
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    """
+    API endpoint to retrieve a JWT token for a user.
+    """
+    serializer_class = CustomTokenObtainPairSerializer
