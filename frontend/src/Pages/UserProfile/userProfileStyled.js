@@ -79,7 +79,7 @@ export const UserInputContainer = styled.div`
   display: flex;
   align-items: center;
   background-color: #f4f4f4;
-  border-radius: 40px;
+  border-radius: 10px;
   padding: 8px 16px;
 `;
 
@@ -98,20 +98,20 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-    background-color: #e17641;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border: none;
-    border-radius: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 60px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: ${props => (props.success ? 'green' : '#e17641')};
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 
   &:hover {
-    background-color: #d15f32;
+    background-color: ${props => (props.success ? 'green' : '#d15f32')};
   }
 `;
 
@@ -122,16 +122,16 @@ export const RestetDataWrapper = styled.div `
   `
 
 export const ResetDataButton = styled.button`
-  background-color: #D33C00;
+  background-color: #000;
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
   border: none;
   border-radius: 40px;
   margin-top: 40px;
   margin-bottom: 120px;
-  width: 300px;
-  height: 60px;
+  width: 250px;
+  height: 35px;
   cursor: pointer;
   transition: background-color 0.3s;
 

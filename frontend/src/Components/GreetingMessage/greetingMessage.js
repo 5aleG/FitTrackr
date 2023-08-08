@@ -5,20 +5,24 @@ import Lottie from 'lottie-react';
 import loaderAnimation from '../../Assets/animation_lkv6o1yb.json';
 
 const GreetingMessage = () => {
-  const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fitTrackrAPI
-      .get('/user/users/')
-      .then((response) => {
-        setUser(response.data[0]);
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fitTrackrAPI.get('userprofile/me/');
+        localStorage.getItem('user_id');
+        const loggedInUserProfile = response.data;
+        setUserProfile(loggedInUserProfile);
         setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
         setIsLoading(false);
-      });
+      }
+    };
+  
+    fetchUserProfile();
   }, []);
 
   const style = {
@@ -26,7 +30,7 @@ const GreetingMessage = () => {
     width: 150,
   };
 
-  if (isLoading || !user.first_name || !user.last_name) {
+  if (isLoading || !userProfile || !userProfile.first_name || !userProfile.last_name) {
     return <Lottie animationData={loaderAnimation} loop={true} style={style} />;
   }
 
@@ -34,10 +38,11 @@ const GreetingMessage = () => {
     <div>
       <MessageWrapper>
         <Message>Welcome back</Message>
-        <Username>{`${user.first_name} ${user.last_name}`}</Username>
+        <Username>{`${userProfile.first_name} ${userProfile.last_name}`}</Username>
       </MessageWrapper>
     </div>
   );
 };
 
 export default GreetingMessage;
+
