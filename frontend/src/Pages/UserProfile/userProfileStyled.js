@@ -96,3 +96,46 @@ export const Input = styled.input`
   flex: 1;
   height: 40px;
 `;
+
+export const SubmitButton = styled.button`
+    background-color: #e17641;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 60px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #d15f32;
+  }
+`;
+
+export const RestetDataWrapper = styled.div `
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  `
+
+export const ResetDataButton = styled.button`
+  background-color: #D33C00;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  border-radius: 40px;
+  margin-top: 40px;
+  margin-bottom: 120px;
+  width: 300px;
+  height: 60px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #BA3602;
+  }
+`

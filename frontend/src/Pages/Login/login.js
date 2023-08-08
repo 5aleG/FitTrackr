@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { updateUserData } from '../../Redux/Slices/auth'; // Import the updateUserData action
 import { FaUser, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import {
   LoginContainer,
@@ -13,38 +15,51 @@ import {
   LoginButton,
   RegisterText,
 } from './loginStyles';
+import fitTrackrAPI from '../../Axios/fitTrackrAPI';
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/home');
-  };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Username:', formData.username);
-    console.log('Password:', formData.password);
-    // Perform the login logic here
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fitTrackrAPI.post("/auth/token/", formData);
+      if (response.status === 200) {
+        const data = response.data;
+        localStorage.setItem("access_token", data.access);
+        localStorage.setItem("refresh_token", data.refresh);
+        dispatch(updateUserData({ username: formData.username })); 
+        localStorage.setItem('userInfo', JSON.stringify({ username: formData.username }));
+        navigate('/home'); 
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <LoginContainer>
       <HelloText>Hey there,</HelloText>
       <WelcomeText>Welcome Back</WelcomeText>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer onSubmit={handleLogin}>
         <InputContainer>
           <Icon>
             <FaUser />
@@ -67,14 +82,14 @@ const Login = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}
-            autoComplete="current-password" // Add autoComplete attribute here
+            autoComplete="current-password"
           />
           <Icon onClick={handleShowPassword}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </Icon>
         </InputContainer>
         <ForgotPassword>Forgot password?</ForgotPassword>
-        <LoginButton type="submit" onClick={handleClick}>Login</LoginButton>
+        <LoginButton type="submit">Login</LoginButton>
       </FormContainer>
       <RegisterText>Don't have an account yet? Register</RegisterText>
     </LoginContainer>

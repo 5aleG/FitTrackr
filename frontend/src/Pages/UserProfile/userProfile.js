@@ -9,7 +9,10 @@ import {
     UserFormContainer,
     InputDescription,
     UserInputContainer,
-    Input
+    Input,
+    SubmitButton,
+    ResetDataButton,
+    RestetDataWrapper
 } from './userProfileStyled'
 import UserIcon from '../../Components/UserIcon/userIcon';
 import { FaPencilAlt } from 'react-icons/fa';
@@ -46,7 +49,7 @@ const UserProfile = () => {
     useEffect(() => {
       const fetchUserData = async () => {
         try {
-          const response = await fitTrackrAPI.get('/user/');
+          const response = await fitTrackrAPI.get('/user/users/');
           setFormData(response.data[0]);
           setIsLoading(false);
         } catch (error) {
@@ -59,7 +62,7 @@ const UserProfile = () => {
     }, []);
   
     if (isLoading) {
-      return null; // Or show a loading spinner
+      return null;
     }
 
     return (
@@ -117,9 +120,12 @@ const UserProfile = () => {
                         >
                         </Input>
                     </UserInputContainer>
-                    <button type="submit">Submit</button> {/* Add the submit button here */}
+                    <SubmitButton type="submit">Submit</SubmitButton> {/* Add the submit button here */}
                 </UserFormContainer>
             </UserProfileSquare>
+            <RestetDataWrapper>
+                <ResetDataButton>Reset Data</ResetDataButton>
+            </RestetDataWrapper>
             <Navbar />
         </>
     )
