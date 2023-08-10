@@ -25,6 +25,7 @@ urlpatterns = [
 
     path('backend/api/v1/user/', include('user.urls')),
     path('backend/api/v1/userprofile/', include('userprofile.urls')),
+    path('backend/api/v1/calories/', include('calories.urls')),
 
     path('backend/api/v1/auth/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
