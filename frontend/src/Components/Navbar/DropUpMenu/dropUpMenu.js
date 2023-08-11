@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux'
+import { updateCalories } from '../../../Redux/Slices/calorieSlice'
+import fitTrackrAPI from '../../../Axios/fitTrackrAPI';
 import { 
   DropUpContainer, 
   MenuItem, 
@@ -14,6 +17,8 @@ const DropUpMenu = () => {
   const [workoutInput, setWorkoutInput] = useState('');
   const [weightInput, setWeightInput] = useState('');
   const [caloriesInput, setCaloriesInput] = useState('');
+  const dispatch = useDispatch();
+
 
   const inputRef = useRef(null);
 
@@ -21,30 +26,63 @@ const DropUpMenu = () => {
     setSelectedForm(formType);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Placeholder to be replaced with API Post
-    switch (selectedForm) {
-      case 'water':
-        console.log(`Water intake recorded: ${waterInput} mL`);
-        setWaterInput('');
-        break;
-      case 'workout':
-        console.log(`Workout recorded: ${workoutInput}`);
-        setWorkoutInput('');
-        break;
-      case 'weight':
-        console.log(`Weight recorded: ${weightInput} kg`);
-        setWeightInput('');
-        break;
-      case 'calories':
-        console.log(`Calories recorded: ${caloriesInput}`);
+    try {
+      const userId = parseInt(localStorage.getItem('user_id'));
+      if (isNaN(userId)) {
+        console.error('User ID is not valid.');
+        return;
+      }
+  
+      try {
+        console.log('Fetching existing entry...');
+        const existingEntryResponse = await fitTrackrAPI.get(`/calories/daily-calories/${userId}/`);
+        console.log('Existing entry response:', existingEntryResponse);
+        const existingEntry = existingEntryResponse.data;
+        console.log('Existing entry:', existingEntry);
+  
+        const formData = new FormData();
+  
+        if (selectedForm === 'calories') {
+          if (existingEntry) {
+            console.log('Existing entry found, updating calories...');
+            const updatedCalories = parseInt(existingEntry.calories) + parseInt(caloriesInput);
+            console.log('Updated calories:', updatedCalories);
+            formData.append('calories', updatedCalories);
+            formData.append('user_profile', userId);
+            await fitTrackrAPI.patch(`/calories/daily-calories/${userId}/`, formData);
+            console.log('Calories updated successfully.');
+            dispatch(updateCalories(updatedCalories));
+          } else {
+            console.log('No existing entry found, creating new entry...');
+            formData.append('calories', caloriesInput);
+            formData.append('user_profile', userId);
+            await fitTrackrAPI.post(`/calories/create-daily-calories/${userId}/`, formData);
+            console.log('New entry created successfully.');
+            dispatch(updateCalories(caloriesInput));
+          }
+        }
         setCaloriesInput('');
-        break;
-      default:
-        break;
+        setSelectedForm(null);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          console.log('No existing entry found, creating new entry...');
+          const formData = new FormData();
+          const currentDate = new Date().toISOString().split('T')[0];
+          formData.append('calories', caloriesInput);
+          formData.append('user_profile', userId);
+          formData.append('date', currentDate);
+          await fitTrackrAPI.post(`/calories/create-daily-calories/${userId}/`, formData);
+          console.log('New entry created successfully.');
+          dispatch(updateCalories(caloriesInput));
+        } else {
+          console.error('Error submitting data:', error);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching existing entry:', error);
     }
-    setSelectedForm(null);
   };
 
   useEffect(() => {

@@ -75,7 +75,6 @@ const UserProfile = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    // Use conditional logic to set the correct form data
     if (name === 'email' || name === 'password' || name === 'repeatPassword') {
       setEmailPasswordFormData({ ...emailPasswordFormData, [name]: value });
     } else {

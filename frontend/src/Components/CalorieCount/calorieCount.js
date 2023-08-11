@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCalories } from "../../Redux/Slices/calorieSlice";
+import fitTrackrAPI from '../../Axios/fitTrackrAPI'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import {
@@ -23,40 +26,46 @@ const formatDate = (dateString) => {
 
 const CalorieCount = () => {
   const [expanded, setExpanded] = useState(false);
-  const [calories, setCalories] = useState(0);
-  const dailyCalories = 1856; // Dummy data
-  const dailyaCaloriesGoal = 2500; //Dummy data
+  const dispatch = useDispatch();
+  const calories = useSelector(state => state.calories.calories);
+  const dailyaCaloriesGoal = 2500; // Dummy data
 
   const handleCalorieCountClick = () => {
     setExpanded(!expanded);
   };
 
   useEffect(() => {
-    let startValue = 0;
-    const animationDuration = 600;
-    const step = (dailyCalories / animationDuration) * 10;
-
-    const timer = setInterval(() => {
-      startValue += step;
-      if (startValue >= dailyCalories) {
-        clearInterval(timer);
+    const fetchUserDailyCalories = async () => {
+      try {
+        const userId = localStorage.getItem('user_id');
+        const existingEntryResponse = await fitTrackrAPI.get(`/calories/daily-calories/${userId}/`);
+        const existingEntryData = existingEntryResponse.data; 
+  
+        console.log(existingEntryData);
+        
+        if (existingEntryData) {
+          console.log('Calories before dispatch:', existingEntryData.calories);
+          dispatch(updateCalories(existingEntryData.calories));
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-      setCalories(Math.floor(startValue));
-    }, 10);
-    return () => clearInterval(timer);
-  }, [dailyCalories]);
-
-  // Dummy data for the caloric intake of the previous 7 days
-  const previousDaysData = [
-    { date: "2023-07-21", calories: 1850 },
-    { date: "2023-07-20", calories: 2200 },
-    { date: "2023-07-19", calories: 2100 },
-    { date: "2023-07-18", calories: 1950 },
-    { date: "2023-07-17", calories: 1800 },
-    { date: "2023-07-16", calories: 1900 },
-    { date: "2023-07-15", calories: 2000 },
-  ];
-
+    };
+  
+    fetchUserDailyCalories();
+  }, [dispatch]);
+  
+    // Dummy data for the caloric intake of the previous 7 days
+    const previousDaysData = [
+      { date: "2023-07-21", calories: 1850 },
+      { date: "2023-07-20", calories: 2200 },
+      { date: "2023-07-19", calories: 2100 },
+      { date: "2023-07-18", calories: 1950 },
+      { date: "2023-07-17", calories: 1800 },
+      { date: "2023-07-16", calories: 1900 },
+      { date: "2023-07-15", calories: 2000 },
+    ];
+    
   // Calculate the average of the last 7 days (excluding "Today")
   const averageCalories = previousDaysData.slice(1).reduce((sum, dayData) => sum + dayData.calories, 0) / 6;
 
@@ -90,7 +99,7 @@ const CalorieCount = () => {
       {!expanded && <CircularProgressbarWrapper>
           <CircularProgressbar
             value={progressPercentage}
-            text={`${dailyCalories} / ${dailyaCaloriesGoal} cal`}
+            text={`${calories} / ${dailyaCaloriesGoal} cal`}
             styles={{
               path: {
                 stroke: `#78C4D3`,
