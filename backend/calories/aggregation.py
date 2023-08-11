@@ -13,8 +13,8 @@ def calculate_weekly_calories(user_profile):
 
         if week_start not in weekly_calories:
             weekly_calories[week_start] = {
-                'week_start': week_start,
-                'week_end': week_end,
+                'start_date': week_start,
+                'end_date': week_end,
                 'calories': 0
             }
 

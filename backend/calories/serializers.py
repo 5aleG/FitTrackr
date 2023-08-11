@@ -5,7 +5,7 @@ from .models import DailyCalories, WeeklyCalories, MonthlyCalories, AllTimeCalor
 class DailyCaloriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyCalories
-        fields = '__all__'
+        fields = ('user_profile', 'calories', 'date')
 
 
 class WeeklyCaloriesSerializer(serializers.ModelSerializer):
