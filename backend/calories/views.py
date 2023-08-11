@@ -1,4 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
+
 from .aggregation import calculate_weekly_calories, calculate_monthly_calories, calculate_all_time_calories
 from .models import DailyCalories, WeeklyCalories, MonthlyCalories, AllTimeCalories
 from .serializers import (
@@ -12,15 +14,20 @@ from .serializers import (
 class DailyCaloriesCreate(generics.CreateAPIView):
     queryset = DailyCalories.objects.all()
     serializer_class = DailyCaloriesSerializer
+    lookup_field = 'user_profile'
 
-    def perform_create(self, serializer):
-        user_profile = self.request.user.user_profile
-        serializer.save(user_profile=user_profile)
+    # def perform_create(self, serializer):
+    #     user_profile = self.request.user.user_profile
+    #     serializer.save(user_profile=user_profile)
+    #     calculate_weekly_calories(user_profile)
+    #     calculate_monthly_calories(user_profile)
+    #     calculate_all_time_calories(user_profile)
 
 
-class DailyCaloriesDetail(generics.RetrieveUpdateAPIView):
+class DailyCaloriesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = DailyCalories.objects.all()
     serializer_class = DailyCaloriesSerializer
+    lookup_field = 'user_profile'
 
     def perform_create(self, serializer):
         user_profile = self.request.user.user_profile

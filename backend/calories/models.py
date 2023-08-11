@@ -4,7 +4,7 @@ from userprofile.models import UserProfile
 
 
 class DailyCalories(models.Model):
-    date = models.DateField(unique=True)
+    date = models.DateField()
     calories = models.PositiveIntegerField()
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=0)
 
