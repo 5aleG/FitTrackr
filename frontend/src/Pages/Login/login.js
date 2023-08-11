@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { updateUserData } from '../../Redux/Slices/auth'; // Import the updateUserData action
+import { updateUserData } from '../../Redux/Slices/auth';
 import { FaUser, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import {
   LoginContainer,
@@ -42,10 +42,15 @@ const Login = () => {
       const response = await fitTrackrAPI.post("/auth/token/", formData);
       if (response.status === 200) {
         const data = response.data;
+        console.log('Received data:', data);
+  
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("refresh_token", data.refresh);
         localStorage.setItem("user_id", data.user_id);
-        dispatch(updateUserData({ username: formData.username })); 
+        
+        dispatch(updateUserData({ username: formData.username }));
+        console.log('Dispatched username:', formData.username);
+        
         localStorage.setItem('userInfo', JSON.stringify({ username: formData.username }));
         navigate('/home'); 
       } else {
@@ -55,6 +60,7 @@ const Login = () => {
       console.error(error);
     }
   };
+  
 
   return (
     <LoginContainer>
