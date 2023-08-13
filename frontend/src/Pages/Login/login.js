@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { updateUserData } from '../../Redux/Slices/auth';
+import logo from '../../Assets/logo.svg'
 import { FaUser, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa';
 import {
   LoginContainer,
@@ -14,6 +15,8 @@ import {
   ForgotPassword,
   LoginButton,
   RegisterText,
+  Logo,
+  LogoWrapper,
 } from './loginStyles';
 import fitTrackrAPI from '../../Axios/fitTrackrAPI';
 
@@ -63,44 +66,49 @@ const Login = () => {
   
 
   return (
-    <LoginContainer>
-      <HelloText>Hey there,</HelloText>
-      <WelcomeText>Welcome Back</WelcomeText>
-      <FormContainer onSubmit={handleLogin}>
-        <InputContainer>
-          <Icon>
-            <FaUser />
-          </Icon>
-          <Input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleInputChange}
-            autoComplete='username'
-          />
-        </InputContainer>
-        <InputContainer>
-          <Icon>
-            <FaLock />
-          </Icon>
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleInputChange}
-            autoComplete="current-password"
-          />
-          <Icon onClick={handleShowPassword}>
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </Icon>
-        </InputContainer>
-        <ForgotPassword>Forgot password?</ForgotPassword>
-        <LoginButton type="submit">Login</LoginButton>
-      </FormContainer>
-      <RegisterText>Don't have an account yet? Register</RegisterText>
-    </LoginContainer>
+    <>
+      <LogoWrapper>
+          <Logo src={logo} alt='logo' sty/>
+        </LogoWrapper>
+      <LoginContainer>
+        <HelloText>Hey there,</HelloText>
+        <WelcomeText>Welcome Back</WelcomeText>
+        <FormContainer onSubmit={handleLogin}>
+          <InputContainer>
+            <Icon>
+              <FaUser />
+            </Icon>
+            <Input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleInputChange}
+              autoComplete='username'
+            />
+          </InputContainer>
+          <InputContainer>
+            <Icon>
+              <FaLock />
+            </Icon>
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+              autoComplete="current-password"
+            />
+            <Icon onClick={handleShowPassword}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </Icon>
+          </InputContainer>
+          <ForgotPassword>Forgot password?</ForgotPassword>
+          <LoginButton type="submit">Login</LoginButton>
+        </FormContainer>
+        <RegisterText>Don't have an account yet? Register</RegisterText>
+      </LoginContainer>
+    </>
   );
 };
 

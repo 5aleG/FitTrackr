@@ -8,10 +8,22 @@ export const LoginContainer = styled.div`
     padding: 20px;
 `;
 
+export const LogoWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+`
+
+export const Logo = styled.img`
+    width: 50px;
+    height: 50px;
+`
+
 export const HelloText = styled.h2`
     font-weight: normal;
     color: var(--primary-text-color);
-    margin-top: 100px;
+    margin-top: 30px;
     margin-bottom: 10px;
 `;
 
