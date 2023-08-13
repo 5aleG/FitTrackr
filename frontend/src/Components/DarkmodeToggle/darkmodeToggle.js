@@ -31,6 +31,7 @@ const DarkModeToggle = () => {
     root.style.setProperty("--secondary-text-color", "#949494");
     root.style.setProperty("--button-background-color", "#EAEAEA");
     root.style.setProperty("--button-text-color", "#525252");
+    root.style.setProperty("--input-background-color", "#F4F4F4");
     root.style.setProperty("--highlight-color", "#79CFF2");
     root.style.setProperty("--box-shadow-color", "#E4EAF1");
   };
@@ -43,6 +44,7 @@ const DarkModeToggle = () => {
     root.style.setProperty("--secondary-text-color", "#949494");
     root.style.setProperty("--button-background-color", "#262626");
     root.style.setProperty("--button-text-color", "#525252");
+    root.style.setProperty("--input-background-color", "#000");
     root.style.setProperty("--highlight-color", "#79CFF2");
     root.style.setProperty("--box-shadow-color", "#232323");
   };

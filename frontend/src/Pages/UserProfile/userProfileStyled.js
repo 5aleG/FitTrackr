@@ -78,7 +78,7 @@ export const InputDescription = styled.div`
 export const UserInputContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: #f4f4f4;
+  background-color: var(--input-background-color);
   border-radius: 10px;
   padding: 8px 16px;
 `;
