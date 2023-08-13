@@ -31,7 +31,7 @@ export const FormContainer = styled.form`
 export const InputContainer = styled.div`
     display: flex;
     align-items: center;
-    background-color: #f7f8f8;
+    background-color: var(--input-background-color);
     border-radius: 40px;
     padding: 8px 16px;
     width: 100%;
@@ -72,7 +72,6 @@ export const LoginButton = styled.button`
     font-size: 20px;
     border: none;
     border-radius: 40px;
-    margin-bottom: 20px;
     height: 60px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -83,5 +82,6 @@ export const LoginButton = styled.button`
 `;
 
 export const RegisterText = styled.p`
+    margin-top: 20px;
     color: var(--primary-text-color);
 `;

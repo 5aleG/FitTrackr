@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     --secondary-text-color: #949494;
     --button-text-color: #525252;
     --button-background-color: #F4F4F4;
+    --input-background-color: #F4F4F4;
     --highlight-color: #79CFF2;
     --box-shadow-color: #E4EAF1;
   }

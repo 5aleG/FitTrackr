@@ -121,40 +121,6 @@ const UserProfile = () => {
         </UserEditAvatarWrapper>
       </UserEditAvatarContainer>
       <UserProfileSquare>
-        <UserFormContainer onSubmit={handleEmailPasswordSubmit}>
-          <InputDescription>Email Address</InputDescription>
-          <UserInputContainer>
-            <Input
-              type="text"
-              name="email"
-              placeholder={emailPasswordFormData.email}
-              onChange={handleInputChange}
-            />
-          </UserInputContainer>
-          <InputDescription>Password</InputDescription>
-          <UserInputContainer>
-            <Input
-              type="password"
-              name="password"
-              placeholder="New password"
-              onChange={handleInputChange}
-            />
-          </UserInputContainer>
-          <InputDescription>Repeat Password</InputDescription>
-          <UserInputContainer>
-            <Input
-              type="password"
-              name="repeatPassword"
-              placeholder="Repeat new password"
-              onChange={handleInputChange}
-            />
-          </UserInputContainer>
-          <SubmitButton type="submit" success={updateSuccess}>
-            {updateSuccess ? 'Updated' : 'Submit'}
-          </SubmitButton>
-        </UserFormContainer>
-      </UserProfileSquare>
-      <UserProfileSquare>
         <UserFormContainer onSubmit={handleSubmit}>
           <InputDescription>First Name</InputDescription>
           <UserInputContainer>
@@ -198,6 +164,40 @@ const UserProfile = () => {
               type="text"
               name="weight"
               placeholder={formData.weight}
+              onChange={handleInputChange}
+            />
+          </UserInputContainer>
+          <SubmitButton type="submit" success={updateSuccess}>
+            {updateSuccess ? 'Updated' : 'Submit'}
+          </SubmitButton>
+        </UserFormContainer>
+      </UserProfileSquare>
+      <UserProfileSquare>
+        <UserFormContainer onSubmit={handleEmailPasswordSubmit}>
+          <InputDescription>Email Address</InputDescription>
+          <UserInputContainer>
+            <Input
+              type="text"
+              name="email"
+              placeholder={emailPasswordFormData.email}
+              onChange={handleInputChange}
+            />
+          </UserInputContainer>
+          <InputDescription>Password</InputDescription>
+          <UserInputContainer>
+            <Input
+              type="password"
+              name="password"
+              placeholder="New password"
+              onChange={handleInputChange}
+            />
+          </UserInputContainer>
+          <InputDescription>Repeat Password</InputDescription>
+          <UserInputContainer>
+            <Input
+              type="password"
+              name="repeatPassword"
+              placeholder="Repeat new password"
               onChange={handleInputChange}
             />
           </UserInputContainer>
