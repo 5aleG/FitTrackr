@@ -1,8 +1,6 @@
 # FiTraQ - Fitness Tracker Application
 
-<img src="./Assets/screenshot1.png" alt="Screenshot 1" width="200">
-<img src="./Assets/screenshot2.png" alt="Screenshot 2" width="200">
-<img src="./Assets/screenshot3.png" alt="Screenshot 3" width="200">
+<img src="./Assets/screenshot.png" alt="Screenshot 1" width="700">
 
 ## Description
 
