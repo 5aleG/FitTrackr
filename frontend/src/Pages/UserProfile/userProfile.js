@@ -47,7 +47,7 @@ const UserProfile = () => {
     const refresh_token = localStorage.getItem('refresh_token');
 
     if (!access_token || !refresh_token) {
-      navigate('/login');
+      navigate('/');
     }
   }, [navigate]);
 
