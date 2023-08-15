@@ -1,46 +1,84 @@
-# FiTraQ - Fitness Tracker Application
+# FiTraQ - Fit Tracking Application
 
-<img src="./Assets/screenshot.png" alt="Screenshot 1" width="700">
+![Screenshot](./Assets/screenshot.png)
 
-## Description
+## Content
+- [Overview](#overview)
+- [Motivation](#motivation)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-FiTraQ is a versatile fitness tracker application designed to help users of all backgrounds and fitness levels achieve their health and wellness goals. It provides a comprehensive set of features to track workouts, set goals, and monitor progress, all in an intuitive and user-friendly interface.
+## Overview
+
+FiTraQ is a user-friendly health and fitness tracking application designed to help users achieve their health and wellness goals. With its intuitive interface and comprehensive feature set, FiTraQ provides a seamless experience for tracking workouts, monitoring calorie intake, and managing hydration.
 
 ## Motivation
 
-Many existing fitness tracking apps are complicated to use, leading to user frustration. FiTraQ was developed to address this issue by offering an easy-to-use solution for tracking calories and water intake. This project was also a valuable opportunity for skill development and practice.
+Existing fitness apps often lack user-friendly interfaces, hindering user engagement. FiTraQ was born out of the need for an accessible and efficient fitness tracking solution that empowers users to take control of their health journey.
 
-## Technologies Used
+## Features
 
-- React
-- Redux
-- Styled Components
-- Django
-- DjangoREST
-- SimpleJWT
+- Track daily workouts and exercises.
+- Monitor calorie consumption and set personalized goals.
+- Keep hydration levels in check by tracking water intake.
+- User-friendly interface for a seamless experience.
+- Integration of React, Redux, Django, and DjangoREST for enhanced functionality.
 
-## Installation
+## Getting Started
 
-### Frontend
+### Prerequisites
 
-1. Download or clone the repository.
-2. Navigate to the frontend directory: `cd frontend`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+- Node.js and npm (for the frontend).
+- Python and Conda (for the backend).
 
-### Backend
+### Installation
 
-1. Ensure you have Conda installed.
-2. In the project's root directory, create the environment: `conda env create -f requirements.yml`
-3. Apply migrations: `python manage.py makemigrations` and `python manage.py migrate`
-4. Create a superuser: `python manage.py createsuperuser`
-5. Start the development server: `python manage.py runserver 0:8001`
-6. Visit `localhost:8001` to access the admin panel. Create a user profile for testing purposes.
+1. Clone the repository:
+   
+   ```sh
+   git clone https://github.com/5aleG/fitraq.git
+   cd fitraq
 
-## Usage
+3. Frontend
+   
+    ```sh
+    cd frontend
+    npm install
+    npm start
+    ```
+   This will start the development server for the frontend application.
 
-Please note that FiTraQ is still under development. Contributions and collaborations are welcome to improve and expand its functionality.
 
----
+3. Backend
+   
+    ```sh
+    cd backend
+    conda env create -f requirements.yml
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py runserver 0:8001
+    ```
+    This will set up and start the backend development server.
 
-For more details and to contribute, please visit the [GitHub repository](https://github.com/5aleG/fitraq).
+
+4. Visit:
+    ```
+    http://localhost:8001/backend/api/v1/admin/
+    ```
+    To access the admin panel. Create a user profile for testing purposes.
+
+
+### Usage
+FiTraQ is a work in progress, and contributions are welcome. Feel free to explore the code, test the application, and provide feedback or feature suggestions.
+
+### Contributing
+Contributions are appreciated! Whether you want to report a bug, suggest improvements, or contribute code.
+ 
+### License
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
