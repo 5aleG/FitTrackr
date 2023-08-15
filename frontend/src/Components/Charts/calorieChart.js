@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { GraphContainer, ChartText } from './chartsStyled';
 import { Chart as ChartJS, CategoryScale, PointElement, LinearScale, Filler, LineElement } from 'chart.js';
+import fitTrackrAPI from '../../Axios/fitTrackrAPI';
 
 ChartJS.register(CategoryScale, PointElement, LinearScale, Filler, LineElement);
 
 const CalorieChart = () => {
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  const [caloriesData, setCaloriesData] = useState([]);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('user_id');
+    console.log('Fetching data for user ID:', userId);
+  
+    fitTrackrAPI.get(`/calories/all-calories/${userId}/`)
+      .then(response => {
+        console.log('API response:', response);
+        setCaloriesData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+    // Format the date without the year
+    const formatDateWithoutYear = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
+    };
+  
+  const chartData = {
+    labels: caloriesData.map(entry => formatDateWithoutYear(entry.date)),
     datasets: [
       {
-        label: 'Weight',
-        data: [2570, 2553, 2453, 2300, 2299, 2456, 2500],
+        label: 'Calories',
+        data: caloriesData.map(entry => entry.calories),
         fill: true,
         borderColor: '#78C4D3',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderWidth: 1.5,
-        color: 'var(--primary-text-color)',
       },
     ],
   };
+  
 
   const options = {
     responsive: true,
@@ -29,7 +52,7 @@ const CalorieChart = () => {
       },
       title: {
         display: true,
-        text: 'Weight Chart',
+        text: 'Calories Chart',
       },
     },
     scales: {
@@ -50,10 +73,10 @@ const CalorieChart = () => {
 
   return (
     <>
-    <ChartText>Calories</ChartText>
-    <GraphContainer>
-      <Line data={data} options={options} />
-    </GraphContainer>
+      <ChartText>Calories</ChartText>
+      <GraphContainer>
+        <Line data={chartData} options={options} />
+      </GraphContainer>
     </>
   );
 };
