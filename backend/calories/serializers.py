@@ -11,7 +11,7 @@ class DailyCaloriesSerializer(serializers.ModelSerializer):
 class WeeklyCaloriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = WeeklyCalories
-        fields = '__all__'
+        fields = ('start_date', 'end_date', 'calories', 'user_profile')
 
 
 class MonthlyCaloriesSerializer(serializers.ModelSerializer):
