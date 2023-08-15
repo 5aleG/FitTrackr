@@ -1,13 +1,10 @@
-from rest_framework import generics, status
-from rest_framework.response import Response
-
-from .aggregation import calculate_weekly_calories, calculate_monthly_calories, calculate_all_time_calories
-from .models import DailyCalories, WeeklyCalories, MonthlyCalories, AllTimeCalories
+from rest_framework import generics
+from datetime import date
+from .models import DailyCalories, WeeklyCalories, MonthlyCalories
 from .serializers import (
     DailyCaloriesSerializer,
     WeeklyCaloriesSerializer,
     MonthlyCaloriesSerializer,
-    AllTimeCaloriesSerializer,
 )
 
 
@@ -16,50 +13,36 @@ class DailyCaloriesCreate(generics.CreateAPIView):
     serializer_class = DailyCaloriesSerializer
     lookup_field = 'user_profile'
 
-    # def perform_create(self, serializer):
-    #     user_profile = self.request.user.user_profile
-    #     serializer.save(user_profile=user_profile)
-    #     calculate_weekly_calories(user_profile)
-    #     calculate_monthly_calories(user_profile)
-    #     calculate_all_time_calories(user_profile)
-
 
 class DailyCaloriesDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = DailyCalories.objects.all()
     serializer_class = DailyCaloriesSerializer
     lookup_field = 'user_profile'
 
-    def perform_create(self, serializer):
-        user_profile = self.request.user.user_profile
-        serializer.save(user_profile=user_profile)
-        calculate_weekly_calories(user_profile)
-        calculate_monthly_calories(user_profile)
-        calculate_all_time_calories(user_profile)
+    def get_queryset(self):
+        user_profile_id = self.kwargs['user_profile']
+        current_date = date.today()
+        return DailyCalories.objects.filter(user_profile=user_profile_id, date=current_date)
 
 
 class WeeklyCaloriesDetail(generics.RetrieveUpdateAPIView):
     queryset = WeeklyCalories.objects.all()
     serializer_class = WeeklyCaloriesSerializer
-    lookup_field = 'pk'
+    lookup_field = 'user_profile'
 
-    def perform_create(self, serializer):
-        user_profile = self.request.user.user_profile
-        serializer.save(user_profile=user_profile)
+    def get_queryset(self):
+        user_profile_id = self.kwargs['user_profile']
+        return WeeklyCalories.objects.filter(user_profile=user_profile_id)
 
 
 class MonthlyCaloriesDetail(generics.RetrieveUpdateAPIView):
     queryset = MonthlyCalories.objects.all()
     serializer_class = MonthlyCaloriesSerializer
 
-    def perform_create(self, serializer):
-        user_profile = self.request.user.user_profile
-        serializer.save(user_profile=user_profile)
 
+class AllCaloriesList(generics.ListAPIView):
+    serializer_class = DailyCaloriesSerializer
+    lookup_field = 'user_profile'
 
-class AllTimeCaloriesDetail(generics.RetrieveUpdateAPIView):
-    queryset = AllTimeCalories.objects.all()
-    serializer_class = AllTimeCaloriesSerializer
-
-    def perform_create(self, serializer):
-        user_profile = self.request.user.user_profile
-        serializer.save(user_profile=user_profile)
+    def get_queryset(self):
+        user_profile_id = self.kwargs['user_profile']
+        return DailyCalories.objects.filter(user_profile=user_profile_id)
