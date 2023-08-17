@@ -23,7 +23,6 @@ const CalorieChart = () => {
       });
   }, []);
 
-    // Format the date without the year
     const formatDateWithoutYear = (dateString) => {
       const date = new Date(dateString);
       return date.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric' });
