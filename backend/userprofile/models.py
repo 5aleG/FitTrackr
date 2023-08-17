@@ -20,6 +20,10 @@ class UserProfile(models.Model):
     height = models.FloatField()
     weight = models.FloatField()
     activity_level = models.CharField(max_length=50, blank=True, choices=ACTIVITY_LEVEL_CHOICES)
+    calorie_goal = models.CharField(max_length=50, blank=True)
+    weight_goal = models.CharField(max_length=50, blank=True)
+    water_intake_goal = models.CharField(max_length=50, blank=True)
+    workout_goal = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return str(self.user.username)
