@@ -29,9 +29,9 @@ const formatDate = (dateString) => {
 const CalorieCount = () => {
   const [expanded, setExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [dailyCaloriesGoal, setDailyCaloriesGoal] = useState([]);
   const dispatch = useDispatch();
   const calories = useSelector(state => state.calories.calories);
-  const dailyCaloriesGoal = 2500;
   const userId = localStorage.getItem('user_id');
 
   const handleCalorieCountClick = () => {
@@ -49,6 +49,10 @@ const CalorieCount = () => {
         const previousDaysResponse = await fitTrackrAPI.get(`/calories/all-calories/${userId}/`);
         const previousDaysData = previousDaysResponse.data;
 
+        const userProfileResponse = await fitTrackrAPI.get(`/userprofile/${userId}/`);
+        const userProfileData = userProfileResponse.data;
+
+        console.log(userProfileData)
         console.log(currentDateData);
         console.log(previousDaysData);
         setIsLoading(false);
@@ -57,7 +61,8 @@ const CalorieCount = () => {
           dispatch(updateCalories(currentDateData.calories));
         }
 
-        setPreviousDaysData(previousDaysData.slice(0, 7)); // Set the last 7 entries
+        setPreviousDaysData(previousDaysData.slice(0, 7));
+        setDailyCaloriesGoal(parseInt(userProfileData.calorie_goal));
       } catch (error) {
         console.error('Error fetching data:', error);
         setIsLoading(false);
