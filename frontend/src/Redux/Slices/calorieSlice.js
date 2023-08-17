@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  calories: 0,
+  calories: [],
 };
 
 const caloriesSlice = createSlice({

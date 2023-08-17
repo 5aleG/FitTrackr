@@ -18,6 +18,8 @@ import {
   ExpandableText,
 } from "./calorieCountStyled";
 import { PiBowlFoodDuotone } from "react-icons/pi";
+import Lottie from 'lottie-react';
+import loaderAnimation from '../../Assets/animation_lkv6o1yb.json';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -26,51 +28,53 @@ const formatDate = (dateString) => {
 
 const CalorieCount = () => {
   const [expanded, setExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const calories = useSelector(state => state.calories.calories);
-  const dailyaCaloriesGoal = 2500; // Dummy data
+  const dailyCaloriesGoal = 2500;
+  const userId = localStorage.getItem('user_id');
 
   const handleCalorieCountClick = () => {
     setExpanded(!expanded);
   };
 
+  const [previousDaysData, setPreviousDaysData] = useState([]);
+
   useEffect(() => {
-    const fetchUserDailyCalories = async () => {
+    const fetchUserCalorieData = async () => {
       try {
-        const userId = localStorage.getItem('user_id');
-        const existingEntryResponse = await fitTrackrAPI.get(`/calories/daily-calories/${userId}/`);
-        const existingEntryData = existingEntryResponse.data; 
-  
-        console.log(existingEntryData);
-        
-        if (existingEntryData) {
-          console.log('Calories before dispatch:', existingEntryData.calories);
-          dispatch(updateCalories(existingEntryData.calories));
+        const currentDateResponse = await fitTrackrAPI.get(`/calories/daily-calories/${userId}/`);
+        const currentDateData = currentDateResponse.data;
+
+        const previousDaysResponse = await fitTrackrAPI.get(`/calories/all-calories/${userId}/`);
+        const previousDaysData = previousDaysResponse.data;
+
+        console.log(currentDateData);
+        console.log(previousDaysData);
+        setIsLoading(false);
+
+        if (currentDateData) {
+          dispatch(updateCalories(currentDateData.calories));
         }
+
+        setPreviousDaysData(previousDaysData.slice(0, 7)); // Set the last 7 entries
       } catch (error) {
         console.error('Error fetching data:', error);
+        setIsLoading(false);
       }
     };
-  
-    fetchUserDailyCalories();
-  }, [dispatch]);
-  
-    // Dummy data for the caloric intake of the previous 7 days
-    const previousDaysData = [
-      { date: "2023-07-21", calories: 1850 },
-      { date: "2023-07-20", calories: 2200 },
-      { date: "2023-07-19", calories: 2100 },
-      { date: "2023-07-18", calories: 1950 },
-      { date: "2023-07-17", calories: 1800 },
-      { date: "2023-07-16", calories: 1900 },
-      { date: "2023-07-15", calories: 2000 },
-    ];
-    
-  // Calculate the average of the last 7 days (excluding "Today")
-  const averageCalories = previousDaysData.slice(1).reduce((sum, dayData) => sum + dayData.calories, 0) / 6;
 
-  let progressPercentage = (calories / dailyaCaloriesGoal) * 100;
-  if (calories > dailyaCaloriesGoal) {
+    fetchUserCalorieData();
+  }, [dispatch, userId]);
+  
+  if (isLoading ||!calories || previousDaysData.length === 0) {
+    return <Lottie animationData={loaderAnimation} loop={true} style={{ height: 150, width: 150 }} />;
+  }
+
+  const averageCalories = previousDaysData.reduce((sum, dayData) => sum + dayData.calories, 0) / previousDaysData.length;
+
+  let progressPercentage = (calories / dailyCaloriesGoal) * 100;
+  if (calories > dailyCaloriesGoal) {
     progressPercentage = 100;
   }
 
@@ -83,7 +87,7 @@ const CalorieCount = () => {
         </BigCalories>
         {expanded && (
           <AverageContainer>
-            <AverageLabel>Average of the Last 7 Days:</AverageLabel>
+            <AverageLabel>Average of the Last 7 Entries:</AverageLabel>
             <AverageValue>{Math.round(averageCalories)} Cal</AverageValue>
           </AverageContainer>
         )}
@@ -99,7 +103,7 @@ const CalorieCount = () => {
       {!expanded && <CircularProgressbarWrapper>
           <CircularProgressbar
             value={progressPercentage}
-            text={`${calories} / ${dailyaCaloriesGoal} cal`}
+            text={`${calories} / ${dailyCaloriesGoal} cal`}
             styles={{
               path: {
                 stroke: `#78C4D3`,
@@ -117,9 +121,10 @@ const CalorieCount = () => {
               },
             }}
           />
-        </CircularProgressbarWrapper>}
+        </CircularProgressbarWrapper>
+      }
     </CalorieCountSquare>
   );
-};
+}
 
 export default CalorieCount;
