@@ -4,12 +4,13 @@ from .models import UserProfile
 from .serilaizers import UserProfileSerializer
 
 
-class UserProfileList(generics.ListCreateAPIView):
+class UserProfileList(generics.RetrieveAPIView):
     """
-    List all user profiles
+    Retrieve a specific user profile by ID
     """
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    lookup_field = 'id'
 
 
 class UserProfileDetail(generics.RetrieveUpdateAPIView):

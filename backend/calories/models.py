@@ -1,7 +1,5 @@
-from datetime import timedelta
-from datetime import date
 from django.db import models
-from django.db.models import Sum
+from django.utils import timezone
 
 from userprofile.models import UserProfile
 
@@ -15,16 +13,14 @@ class DailyCalories(models.Model):
         return str(self.calories)
 
     def save(self, *args, **kwargs):
-        if not self.pk:  # If it's a new instance (not an update)
-            self.date = date.today()  # Set the current date
-        super().save(*args, **kwargs)
-        self.update_aggregates()
-
-    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.date = timezone.now().date()
         super().save(*args, **kwargs)
         self.update_aggregates()
 
     def update_aggregates(self):
+        from datetime import timedelta
+
         # Update weekly, monthly, and all-time aggregates
         week_start = self.date - timedelta(days=self.date.weekday())
         week_end = week_start + timedelta(days=6)
@@ -34,16 +30,16 @@ class DailyCalories(models.Model):
         weekly_calories = DailyCalories.objects.filter(
             user_profile=self.user_profile,
             date__range=[week_start, week_end]
-        ).aggregate(Sum('calories'))['calories__sum']
+        ).aggregate(models.Sum('calories'))['calories__sum']
 
         monthly_calories = DailyCalories.objects.filter(
             user_profile=self.user_profile,
             date__range=[month_start, month_end]
-        ).aggregate(Sum('calories'))['calories__sum']
+        ).aggregate(models.Sum('calories'))['calories__sum']
 
         all_time_calories = DailyCalories.objects.filter(
             user_profile=self.user_profile
-        ).aggregate(Sum('calories'))['calories__sum']
+        ).aggregate(models.Sum('calories'))['calories__sum']
 
         WeeklyCalories.objects.update_or_create(
             user_profile=self.user_profile,
