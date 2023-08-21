@@ -76,6 +76,9 @@ const DropUpMenu = () => {
           await fitTrackrAPI.post(`/calories/create-daily-calories/${userId}/`, formData);
           console.log('New entry created successfully.');
           dispatch(updateCalories(caloriesInput));
+
+          setCaloriesInput('');
+          setSelectedForm(null);
         } else {
           console.error('Error submitting data:', error);
         }
