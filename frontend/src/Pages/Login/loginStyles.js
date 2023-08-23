@@ -1,4 +1,16 @@
-import styled from 'styled-components'
+import styled, { keyframes, css} from 'styled-components'
+
+const shakeAnimation = keyframes`
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+`;
 
 export const LoginContainer = styled.div`
     display: flex;
@@ -41,14 +53,22 @@ export const FormContainer = styled.form`
 `
 
 export const InputContainer = styled.div`
-    display: flex;
-    align-items: center;
-    background-color: var(--input-background-color);
-    border-radius: 40px;
-    padding: 8px 16px;
-    width: 100%;
-    max-width: 300px;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  background-color: ${props =>
+    props.failed ? '#FFF0F0' : 'var(--input-background-color)'};
+  border: ${props =>
+    props.failed ? '2px solid #FF6C70' : 'none'};
+  border-radius: 40px;
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 15px;
+  ${props =>
+    props.failed &&
+    css`
+      animation: ${shakeAnimation} 0.5s;
+    `}
 `;
 
 export const Icon = styled.div`

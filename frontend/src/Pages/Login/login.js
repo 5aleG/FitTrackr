@@ -24,6 +24,7 @@ import fitTrackrAPI from '../../Axios/fitTrackrAPI';
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const [loginFailed, setLoginFailed] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,9 +59,11 @@ const Login = () => {
         navigate('/home'); 
       } else {
         console.error("Login failed");
+        setLoginFailed(true)
       }
     } catch (error) {
       console.error(error);
+      setLoginFailed(true);
     }
   };
   
@@ -74,7 +77,7 @@ const Login = () => {
         <HelloText>Hey there,</HelloText>
         <WelcomeText>Welcome Back</WelcomeText>
         <FormContainer onSubmit={handleLogin}>
-          <InputContainer>
+          <InputContainer failed={loginFailed}>
             <Icon>
               <FaUser />
             </Icon>
@@ -87,7 +90,7 @@ const Login = () => {
               autoComplete='username'
             />
           </InputContainer>
-          <InputContainer>
+          <InputContainer failed={loginFailed}>
             <Icon>
               <FaLock />
             </Icon>
